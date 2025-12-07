@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Dr. Kapil Akula</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #0066cc;
+            --secondary-color: #003d7a;
+            --accent-color: #00b4cc;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+
+        header {
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .intro-text {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        /* Upload Section */
+        .upload-section {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .upload-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .upload-section p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input[type="file"],
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border-color);
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-group input[type="file"]:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-light);
+        }
+
+        .status-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            font-weight: 500;
+            display: none;
+        }
+
+        .status-message.success {
+            display: block;
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-message.error {
+            display: block;
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status-message.info {
+            display: block;
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        /* Gallery Grid */
+        .gallery-section {
+            margin-top: 3rem;
+        }
+
+        .gallery-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .gallery-item {
+            background: var(--bg-white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item-info {
+            padding: 1rem;
+            background: var(--bg-white);
+        }
+
+        .gallery-item-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-item-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .gallery-item-link:hover {
+            text-decoration: underline;
+        }
+
+        .empty-gallery {
+            text-align: center;
+            padding: 3rem;
+            background: var(--bg-white);
+            border-radius: 8px;
+            color: var(--text-light);
+        }
+
+        .empty-gallery p {
+            font-size: 1.1rem;
+        }
+
+        
+        /* Video Gallery */
+        .video-section {
+            margin-top: 3rem;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .video-item {
+            background: var(--bg-white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .video-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+        }
+
+        .video-item video {
+            width: 100%;
+            height: 220px;
+            display: block;
+            background: #000;
+        }
+
+        .video-item-info {
+            padding: 1rem;
+            background: var(--bg-white);
+        }
+
+        .video-item-info p {
+            margin: 0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .empty-video {
+            text-align: center;
+            padding: 3rem;
+            background: var(--bg-white);
+            border-radius: 8px;
+            color: var(--text-light);
+        }
+
+
+        footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">Dr. Kapil Akula</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/#about">About</a></li>
+                <li><a href="/#specialties">Services</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="/#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Gallery & Resources</h1>
+        <p class="intro-text">
+            This gallery showcases our clinical resources, certificates, workshop photographs, and anonymized clinical images that demonstrate our commitment to excellence in pediatric intensive care. Images are reviewed before publishing to maintain patient confidentiality and professional standards.
+        </p>
+
+        <!-- Upload Section -->
+        <div class="upload-section">
+            <h2>📸 Upload an Image (Staff Only)</h2>
+            <p>Upload workshop photos, certificates, clinical images (non-identifiable) or event photographs. Please ensure all images comply with patient privacy policies and institutional guidelines.</p>
+
+            <form id="imageUploadForm">
+                <div class="form-group">
+                    <label for="imageInput">Select Image*</label>
+                    <input type="file" id="imageInput" accept="image/*" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="imageCaption">Image Description / Caption</label>
+                    <textarea id="imageCaption" placeholder="Brief description of the image (workshop, certificate, event, etc.)"></textarea>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn btn-primary">Upload Image</button>
+                    <button type="reset" class="btn btn-secondary">Clear Form</button>
+                </div>
+
+                <div id="uploadStatus" class="status-message"></div>
+            </form>
+        </div>
+
+        <!-- Video Upload Section -->
+        <div class="upload-section">
+            <h2>🎥 Upload a Video (Staff Only)</h2>
+            <p>Upload short clips of academic talks, PICU teaching sessions or public awareness videos. Please do not upload any content that reveals patient identity or sensitive information.</p>
+
+            <form id="videoUploadForm">
+                <div class="form-group">
+                    <label for="videoInput">Select Video*</label>
+                    <input type="file" id="videoInput" accept="video/*" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="videoCaption">Video Description / Caption</label>
+                    <textarea id="videoCaption" placeholder="Brief description of the video (topic, event, etc.)"></textarea>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn btn-primary">Upload Video</button>
+                    <button type="reset" class="btn btn-secondary">Clear Form</button>
+                </div>
+
+                <div id="videoUploadStatus" class="status-message"></div>
+            </form>
+        </div>
+
+        <!-- Image Gallery Display Section -->
+        <div class="gallery-section">
+            <h2>📷 Image Gallery</h2>
+            <div id="galleryGrid" class="gallery-grid">
+                <div class="empty-gallery">
+                    <p>📁 No images uploaded yet. Be the first to add an image!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Gallery Display Section -->
+        <div class="gallery-section video-section">
+            <h2>🎬 Video Gallery</h2>
+            <div id="videoGalleryGrid" class="video-grid">
+                <div class="empty-video">
+                    <p>🎥 No videos uploaded yet. Add the first PICU update or health talk!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<footer>
+        <p>&copy; 2024 Dr. Kapil Akula - Pediatric Intensivist. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Ankura Hospital for Women & Children | Aundh, Pune</p>
+    </footer>
+
+    
+    <script>
+        const form = document.getElementById('imageUploadForm');
+        const imageInput = document.getElementById('imageInput');
+        const statusDiv = document.getElementById('uploadStatus');
+        const galleryGrid = document.getElementById('galleryGrid');
+
+        const videoForm = document.getElementById('videoUploadForm');
+        const videoInput = document.getElementById('videoInput');
+        const videoStatusDiv = document.getElementById('videoUploadStatus');
+        const videoGalleryGrid = document.getElementById('videoGalleryGrid');
+
+        // Load both images and videos from localStorage on page load
+        window.addEventListener('load', () => {
+            loadImages();
+            loadVideos();
+        });
+
+        // IMAGE UPLOAD HANDLER
+        if (form) {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const file = imageInput.files[0];
+                if (!file) {
+                    showStatus('Please select an image', 'error');
+                    return;
+                }
+
+                showStatus('⏳ Uploading image...', 'info');
+
+                try {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+
+                    reader.onload = async () => {
+                        try {
+                            const response = await fetch('/.netlify/functions/upload-image', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ file: reader.result })
+                            });
+
+                            const data = await response.json();
+
+                            if (data.success) {
+                                saveImageToGallery({
+                                    url: data.url,
+                                    caption: document.getElementById('imageCaption').value || 'Uploaded Image',
+                                    timestamp: new Date().toLocaleDateString()
+                                });
+
+                                showStatus('✅ Image uploaded successfully!', 'success');
+                                form.reset();
+                                loadImages();
+                            } else {
+                                showStatus('❌ Error: ' + data.error, 'error');
+                            }
+                        } catch (error) {
+                            showStatus('❌ Upload failed: ' + error.message, 'error');
+                        }
+                    };
+                } catch (error) {
+                    showStatus('❌ Error processing image: ' + error.message, 'error');
+                }
+            });
+        }
+
+        function showStatus(message, type) {
+            statusDiv.textContent = message;
+            statusDiv.className = 'status-message ' + type;
+            statusDiv.style.display = 'block';
+            setTimeout(() => {
+                if (type === 'success') statusDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        function saveImageToGallery(imageData) {
+            let gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
+            gallery.unshift(imageData);
+            localStorage.setItem('gallery', JSON.stringify(gallery));
+        }
+
+        function loadImages() {
+            let gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
+
+            if (gallery.length === 0) {
+                galleryGrid.innerHTML = '<div class="empty-gallery"><p>📁 No images uploaded yet. Be the first to add an image!</p></div>';
+                return;
+            }
+
+            galleryGrid.innerHTML = gallery.map((item, index) => `
+                <div class="gallery-item">
+                    <img src="${item.url}" alt="${item.caption}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22250%22 height=%22250%22%3E%3Crect fill=%22%23ddd%22 width=%22250%22 height=%22250%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2220%22 fill=%22%23999%22%3EImage not available%3C/text%3E%3C/svg%3E'">
+                    <div class="gallery-item-info">
+                        <p style="margin: 0; color: var(--text-dark); font-weight: 500;">${item.caption}</p>
+                        <p style="margin: 0.25rem 0 0; font-size: 0.85rem;">📅 ${item.timestamp}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // VIDEO UPLOAD HANDLER
+        if (videoForm) {
+            videoForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const file = videoInput.files[0];
+                if (!file) {
+                    showVideoStatus('Please select a video', 'error');
+                    return;
+                }
+
+                showVideoStatus('⏳ Uploading video...', 'info');
+
+                try {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+
+                    reader.onload = async () => {
+                        try {
+                            const response = await fetch('/.netlify/functions/upload-video', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ file: reader.result })
+                            });
+
+                            const data = await response.json();
+
+                            if (data.success) {
+                                saveVideoToGallery({
+                                    url: data.url,
+                                    caption: document.getElementById('videoCaption').value || 'Uploaded Video',
+                                    timestamp: new Date().toLocaleDateString()
+                                });
+
+                                showVideoStatus('✅ Video uploaded successfully!', 'success');
+                                videoForm.reset();
+                                loadVideos();
+                            } else {
+                                showVideoStatus('❌ Error: ' + data.error, 'error');
+                            }
+                        } catch (error) {
+                            showVideoStatus('❌ Upload failed: ' + error.message, 'error');
+                        }
+                    };
+                } catch (error) {
+                    showVideoStatus('❌ Error processing video: ' + error.message, 'error');
+                }
+            });
+        }
+
+        function showVideoStatus(message, type) {
+            videoStatusDiv.textContent = message;
+            videoStatusDiv.className = 'status-message ' + type;
+            videoStatusDiv.style.display = 'block';
+            setTimeout(() => {
+                if (type === 'success') videoStatusDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        function saveVideoToGallery(videoData) {
+            let gallery = JSON.parse(localStorage.getItem('videoGallery') || '[]');
+            gallery.unshift(videoData);
+            localStorage.setItem('videoGallery', JSON.stringify(gallery));
+        }
+
+        function loadVideos() {
+            let gallery = JSON.parse(localStorage.getItem('videoGallery') || '[]');
+
+            if (gallery.length === 0) {
+                videoGalleryGrid.innerHTML = '<div class="empty-video"><p>🎥 No videos uploaded yet. Add the first PICU update or health talk!</p></div>';
+                return;
+            }
+
+            videoGalleryGrid.innerHTML = gallery.map((item, index) => `
+                <div class="video-item">
+                    <video controls preload="metadata">
+                        <source src="${item.url}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-item-info">
+                        <p style="font-weight: 500; color: var(--text-dark);">${item.caption}</p>
+                        <p style="margin-top: 0.25rem; font-size: 0.85rem;">📅 ${item.timestamp}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId && targetId.startsWith("#")) {
+                    e.preventDefault();
+                    const target = document.querySelector(targetId);
+                    if (target) target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1 @@
+User-agent: *\nAllow: /\nSitemap: https://remarkable-gumption-2b54ab.netlify.app/sitemap.xml\n

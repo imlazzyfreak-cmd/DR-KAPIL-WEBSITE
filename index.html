@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Kapil Akula - Pediatric Intensivist | PICU Specialist</title>
+    <meta name="description" content="Dr. Kapil Akula - Specialized pediatric critical care at Ankura Hospital, Aundh, Pune. Expert in mechanical ventilation, sepsis management, PICU care and intensive care for critically ill children.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #0066cc;
+            --secondary-color: #003d7a;
+            --accent-color: #00b4cc;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-white);
+        }
+
+        /* Top bar */
+        .top-bar {
+            background: var(--secondary-color);
+            color: white;
+            font-size: 0.9rem;
+            padding: 0.35rem 2rem;
+        }
+
+        .top-bar-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .top-bar-left span {
+            margin-right: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .top-bar a {
+            color: #e6f1ff;
+            text-decoration: none;
+        }
+
+        .top-bar a:hover {
+            text-decoration: underline;
+        }
+
+        .top-bar-right {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .top-link {
+            border: 1px solid rgba(255,255,255,0.7);
+            border-radius: 999px;
+            padding: 0.15rem 0.75rem;
+            font-weight: 500;
+            text-decoration: none;
+            color: white;
+            font-size: 0.85rem;
+        }
+
+        .top-link:hover {
+            background: rgba(255,255,255,0.12);
+        }
+
+        /* Header & Navigation */
+        header {
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.75rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .doctor-headshot {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-color);
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            line-height: 1.3;
+        }
+
+        .logo-subtitle {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-cta {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-left: 0.75rem;
+        }
+
+        .btn-nav {
+            padding: 0.4rem 0.9rem;
+            border-radius: 999px;
+            border: 1px solid var(--primary-color);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .btn-nav.secondary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-nav:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 4rem 2rem 3.5rem;
+        }
+
+        .hero-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .hero-image-wrapper {
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-headshot {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255,255,255,0.9);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+            background: #ffffff;
+        }
+
+        .hero-text h1 {
+            font-size: 2.7rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.2;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            opacity: 0.95;
+        }
+
+        .hero-extra {
+            font-size: 1rem;
+            margin-bottom: 1.75rem;
+            opacity: 0.9;
+            max-width: 38rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 999px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .btn-secondary {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #009fb1;
+            transform: translateY(-2px);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Sections */
+        section {
+            padding: 3.5rem 0;
+        }
+
+        .section-title {
+            font-size: 2.3rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--text-light);
+            text-align: center;
+            max-width: 650px;
+            margin: -1.5rem auto 2.5rem;
+        }
+
+        /* About Section */
+        #about {
+            background: var(--bg-light);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+            gap: 3rem;
+            align-items: flex-start;
+        }
+
+        .about-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+            color: var(--secondary-color);
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .qualifications {
+            background: var(--bg-white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+            margin-top: 1.5rem;
+        }
+
+        .qualifications h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+        }
+
+        .qualifications p {
+            margin: 0.4rem 0;
+            font-size: 0.95rem;
+        }
+
+        .profile-card {
+            background: var(--bg-white);
+            padding: 1.75rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            border: 1px solid var(--border-color);
+        }
+
+        .profile-card h3 {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-card p {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        .profile-meta {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .profile-meta span {
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Specialties Section */
+        .specialties {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .specialty-card {
+            background: var(--bg-white);
+            padding: 1.8rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .specialty-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            border-color: var(--primary-color);
+        }
+
+        .specialty-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .specialty-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Blog / Health Info */
+        #blog {
+            background: var(--bg-light);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background: var(--bg-white);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            padding: 1.75rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .blog-tag {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .blog-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            color: var(--secondary-color);
+        }
+
+        .blog-card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .blog-meta {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .blog-link {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .blog-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Testimonials Section */
+        #testimonials {
+            background: var(--bg-white);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--bg-light);
+            padding: 1.75rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .testimonial-quote {
+            font-style: italic;
+            margin-bottom: 1.25rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .testimonial-rating {
+            color: #ffc107;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        /* Gallery Preview Section */
+        #gallery-preview {
+            background: var(--bg-light);
+            text-align: center;
+        }
+
+        .gallery-link {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.85rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 999px;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .gallery-link:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Contact Section */
+        #contact {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        .contact-content {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+            gap: 2.5rem;
+            align-items: flex-start;
+        }
+
+        .contact-info {
+            background: rgba(255,255,255,0.08);
+            padding: 1.75rem;
+            border-radius: 10px;
+        }
+
+        .contact-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-item h4 {
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-item p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .location-card {
+            margin-top: 1.25rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid rgba(255,255,255,0.25);
+            font-size: 0.95rem;
+        }
+
+        .location-card strong {
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .hours-list {
+            margin-top: 0.5rem;
+            padding-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .hours-list li {
+            margin-bottom: 0.25rem;
+        }
+
+        .directions-btn {
+            display: inline-block;
+            margin-top: 0.75rem;
+            padding: 0.5rem 1.25rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.7);
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .directions-btn:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        /* Form */
+        .appointment-form {
+            background: rgba(255,255,255,0.1);
+            padding: 1.75rem;
+            border-radius: 10px;
+        }
+
+        .appointment-form h3 {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.35rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.6rem 0.75rem;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.5);
+            font-family: inherit;
+            background: rgba(0,0,0,0.12);
+            color: white;
+            font-size: 0.95rem;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .form-group select {
+            background-image: none;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .submit-btn {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 999px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: #009fb1;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-links {
+                margin-left: 0;
+            }
+
+            .nav-cta {
+                margin-left: 0;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-extra {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-image-wrapper {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 3rem 1.25rem 2.75rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .hero-text .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 1.25rem;
+            }
+
+            .top-bar {
+                padding: 0.35rem 1rem;
+            }
+
+            nav {
+                padding: 0.75rem 1.25rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .top-bar-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .top-bar-right {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Contact Bar -->
+    <div class="top-bar">
+        <div class="top-bar-inner">
+            <div class="top-bar-left">
+                <span>📞 <strong>+91-8657150216</strong></span>
+                <span>✉️ <a href="mailto:drkapilpicu@gmail.com">drkapilpicu@gmail.com</a></span>
+            </div>
+            <div class="top-bar-right">
+                <a href="#contact" class="top-link">Book Appointment</a>
+                <a href="#contact" class="top-link">Teleconsultation</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header>
+        <nav>
+            <div class="nav-left">
+                <img src="images/headshot.png" alt="Dr. Kapil Akula - Pediatric Intensivist" class="doctor-headshot">
+                <a href="/" class="logo">
+                    Dr. Kapil Akula
+                    <span class="logo-subtitle">Pediatric Intensivist · PICU Specialist</span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/#about">About</a></li>
+                <li><a href="/#specialties">Services</a></li>
+                <li><a href="/#blog">Health Info</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="/#contact">Contact</a></li>
+                <div class="nav-cta">
+                    <a href="#contact" class="btn-nav">Book Appointment</a>
+                    <a href="#contact" class="btn-nav secondary">Teleconsultation</a>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-image-wrapper">
+                <img src="images/headshot.png" alt="Dr. Kapil Akula - Pediatric Intensivist Headshot" class="hero-headshot">
+            </div>
+            <div class="hero-text">
+                <h1>Pediatric Intensivist & PICU Specialist in Aundh, Pune</h1>
+                <p class="subtitle">Expert critical care for newborns, infants and children – when every minute counts.</p>
+                <p class="hero-extra">Comprehensive pediatric intensive care at Ankura Hospital for Women & Children, with evidence-based protocols, advanced life support and round-the-clock monitoring.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Book PICU / OPD Appointment</a>
+                    <a href="#about" class="btn btn-secondary">Know Your Doctor</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <!-- About Section -->
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">About Dr. Kapil Akula</h2>
+                <p class="section-subtitle">Dr. Kapil Akula is a trained Pediatric Intensivist with comprehensive experience in managing critically ill children in high-acuity tertiary care PICUs.</p>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Training & Experience</h3>
+                        <p>Dr. Kapil completed his MBBS and MD in Pediatrics from Maharashtra, followed by a superspeciality Doctorate of National Board (DrNB) in Pediatric Critical Care from Dr. Mehta's Multispeciality Hospital, Chennai – a busy Level III PICU receiving complex referrals across South India.</p>
+                        <p>He is skilled in advanced life support, multi-organ failure management, pediatric sepsis and shock, and postoperative intensive care. His training includes focused rotations in Pediatric Cardiothoracic ICU at Narayana Hrudayalaya, Bangalore, and Pediatric Liver Transplant ICU at Rela Institute, Chennai, managing children with complex cardiac and hepatology conditions.</p>
+                        <p>In addition to clinical work, he is actively involved in teaching, protocol development and pediatric critical care research, with a special interest in hemodynamics, renal replacement therapies and ventilation strategies.</p>
+                        <div class="qualifications">
+                            <h4>Qualifications & Languages</h4>
+                            <p><strong>Qualifications:</strong> MBBS, MD (Pediatrics), DrNB (Pediatric Critical Care)</p>
+                            <p><strong>Current Role:</strong> Pediatric Intensivist, Ankura Hospital for Women & Children, Aundh, Pune</p>
+                            <p><strong>Languages:</strong> English, Hindi, Gujarati, Telugu, Marathi</p>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <h3>Clinical Philosophy</h3>
+                        <p>I believe that every child in the PICU deserves meticulous monitoring, timely interventions and clear communication with the family. My goal is to combine evidence-based medicine with humane, family-centred care.</p>
+                        <p>Families are updated regularly in simple language so that they understand the illness, treatment options and realistic expectations at every step.</p>
+                        <div class="profile-meta">
+                            <span>• Special interest in sepsis, shock, respiratory failure and multi-organ dysfunction.</span>
+                            <span>• Experienced in invasive and non-invasive ventilation, high-frequency modes and weaning strategies.</span>
+                            <span>• Skilled in CRRT and other extracorporeal therapies in critically ill children.</span>
+                            <span>• Committed to teaching residents, PICU nurses and the multidisciplinary team.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Specialties Section -->
+        <section id="specialties">
+            <div class="container">
+                <h2 class="section-title">Areas of Expertise</h2>
+                <div class="specialties">
+                    <div class="specialty-card">
+                        <h4>🫁 Mechanical Ventilation</h4>
+                        <p>Advanced management of pediatric ventilation including conventional, non-invasive and rescue modes; optimization of settings for ARDS, bronchiolitis, asthma and neuromuscular conditions; and structured weaning protocols tailored to each child.</p>
+                    </div>
+                    <div class="specialty-card">
+                        <h4>🔬 Sepsis & Shock Management</h4>
+                        <p>Early recognition and aggressive management of sepsis and septic shock in line with international pediatric sepsis guidelines – fluid resuscitation, vasoactive support, source control and continuous hemodynamic monitoring.</p>
+                    </div>
+                    <div class="specialty-card">
+                        <h4>🧠 Neuro & Postoperative PICU Care</h4>
+                        <p>Postoperative care after neurosurgery, complex trauma and major pediatric surgeries, with focus on neuroprotection, pain control, sedation strategies and prevention of secondary brain injury.</p>
+                    </div>
+                    <div class="specialty-card">
+                        <h4>🫀 Extracorporeal Therapies & CRRT</h4>
+                        <p>Continuous Renal Replacement Therapy (CRRT) and other extracorporeal support in children with acute kidney injury, fluid overload and multi-organ dysfunction, including anticoagulation strategies and filter management.</p>
+                    </div>
+                    <div class="specialty-card">
+                        <h4>👶 High-Risk Neonatal & Infant PICU</h4>
+                        <p>Care of high-risk neonates and young infants with severe infections, congenital heart disease, respiratory failure and post-surgical needs, in close coordination with neonatology and pediatric subspecialties.</p>
+                    </div>
+                    <div class="specialty-card">
+                        <h4>👥 Family Communication & Follow-up</h4>
+                        <p>Structured family counselling during PICU stay, honest yet compassionate discussions of prognosis, discharge planning and post-PICU follow up for growth, nutrition and neurodevelopment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog / Health Information Section -->
+        <section id="blog">
+            <div class="container">
+                <h2 class="section-title">Health Information for Parents</h2>
+                <p class="section-subtitle">Short, practical explanations to help you understand when a child needs PICU, what to expect during transfer, and how modern ventilators and sepsis treatments work.</p>
+                <div class="blog-grid">
+                    <article class="blog-card">
+                        <div>
+                            <div class="blog-tag">PICU Basics</div>
+                            <h3>When Does a Child Need PICU?</h3>
+                            <p>Children are shifted to a Pediatric Intensive Care Unit when they have a life-threatening illness or are at high risk of sudden deterioration. Warning signs include fast or difficult breathing, poor responsiveness, persistent low blood pressure, seizures, altered sensorium or the need for strong life-support medicines. In such situations, close monitoring, rapid lab access and the ability to give advanced support (ventilators, inotropes, dialysis) can significantly improve survival.</p>
+                        </div>
+                        <div class="blog-meta">Updated with current pediatric critical care recommendations.</div>
+                        <a href="#contact" class="blog-link">Talk to the PICU team →</a>
+                    </article>
+
+                    <article class="blog-card">
+                        <div>
+                            <div class="blog-tag">PICU Transfer</div>
+                            <h3>What Parents Should Know Before ICU Transfer</h3>
+                            <p>Being told that your child needs PICU is frightening. Before transfer, doctors stabilise the child, secure IV lines and airway if needed, and communicate with the receiving PICU. During transfer, monitoring continues so that any change is detected early. In the PICU, you will see multiple monitors, pumps and machines – they help us watch vital signs second-by-second. Parents are encouraged to ask questions and clarify doubts; an informed parent is an important partner in the child’s care.</p>
+                        </div>
+                        <div class="blog-meta">Includes practical counselling points commonly discussed with families.</div>
+                        <a href="#contact" class="blog-link">Have questions about transfer? →</a>
+                    </article>
+
+                    <article class="blog-card">
+                        <div>
+                            <div class="blog-tag">Ventilators</div>
+                            <h3>Understanding Ventilators in Children – Common Myths</h3>
+                            <p>Ventilators support a child’s breathing while the lungs recover – they do not “do harm” by themselves when used correctly. Modern ventilators allow very precise control of pressures, volumes and oxygen, based on lung condition and age. We use lung-protective strategies to minimise ventilator-related injury and aim to extubate as early and safely as possible. Many children go home and lead normal lives after ventilator support when the underlying illness is treated timely.</p>
+                        </div>
+                        <div class="blog-meta">Based on current pediatric ventilation best practices.</div>
+                        <a href="#contact" class="blog-link">Discuss ventilator concerns →</a>
+                    </article>
+
+                    <article class="blog-card">
+                        <div>
+                            <div class="blog-tag">Sepsis</div>
+                            <h3>Sepsis in Children: Early Warning Signs</h3>
+                            <p>Sepsis is a severe infection that affects the whole body and can quickly progress to shock and organ failure. Red flag signs include persistent high or very low temperature, unusually fast breathing, cold hands and feet, mottled or very pale skin, reduced urine, extreme sleepiness or irritability, and poor feeding. Early recognition, prompt antibiotics and fluid resuscitation, and timely PICU admission are key to improving outcomes.</p>
+                        </div>
+                        <div class="blog-meta">Recognising sepsis early can be life-saving – do not delay seeking care.</div>
+                        <a href="#contact" class="blog-link">If worried, seek urgent help →</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section (Preview) -->
+        <section id="testimonials">
+            <div class="container">
+                <h2 class="section-title">Patient Testimonials</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">★★★★★</div>
+                        <div class="testimonial-quote">
+                            "Dr. Kapil and his team were compassionate and highly skilled. They saved our child's life and explained everything clearly. During such a difficult time, their expertise and care gave us hope."
+                        </div>
+                        <div class="testimonial-author">— Ritu & Family</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">★★★★★</div>
+                        <div class="testimonial-quote">
+                            "Prompt PICU transfer and excellent follow-up care. The attention to detail and continuous monitoring made us feel our child was in the safest hands. Highly recommended."
+                        </div>
+                        <div class="testimonial-author">— Akash & Family</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">★★★★★</div>
+                        <div class="testimonial-quote">
+                            "Professional, calm and reassuring during a very stressful time. Everything about our child's condition and treatment was explained in simple language. We are deeply grateful."
+                        </div>
+                        <div class="testimonial-author">— Sangeeta & Family</div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="testimonials.html" class="gallery-link">View All Testimonials / Write Yours</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Preview -->
+        <section id="gallery-preview">
+            <div class="container">
+                <h2 class="section-title">Gallery & Professional Activities</h2>
+                <p class="section-subtitle">Workshops, academic presentations, PICU training sessions and certificates reflecting our commitment to quality pediatric intensive care.</p>
+                <a href="gallery.html" class="gallery-link">View Gallery</a>
+            </div>
+        </section>
+
+        <!-- Contact & Location Section -->
+        <section id="contact">
+            <div class="container contact-content">
+                <h2 class="section-title" style="color: white;">Get in Touch / Refer a Child</h2>
+                <div class="contact-layout">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <h4>Emergency & PICU Transfer</h4>
+                            <p><strong>Phone: +91-8657150216</strong></p>
+                            <p>For urgent referrals and sick child transfers to PICU, please call the above number or the hospital emergency desk.</p>
+                        </div>
+                        <div class="contact-item">
+                            <h4>Hospital Location</h4>
+                            <p><strong>Ankura Hospital for Women & Children</strong><br>
+                            Opp. SBI PBB, Near Westend Mall, Nagras Road,<br>
+                            Aundh, Pune 411007, Maharashtra</p>
+                            <div class="location-card">
+                                <strong>Opening Hours</strong>
+                                <ul class="hours-list">
+                                    <li>PICU & Emergency: 24 x 7 (round-the-clock critical care)</li>
+                                    <li>Outpatient / Ward Rounds: As per hospital appointment schedule</li>
+                                </ul>
+                                <a class="directions-btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Ankura+Hospital+for+Women+%26+Children+Aundh+Pune">
+                                    📍 Get Directions on Google Maps
+                                </a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <h4>Teleconsultation</h4>
+                            <p>Teleconsultations can be arranged for stable patients, follow-up discussions and report reviews, subject to clinical suitability.</p>
+                            <p>Please mention <strong>“Teleconsultation”</strong> while filling the appointment form.</p>
+                        </div>
+                    </div>
+
+                    <form id="appointmentForm" class="appointment-form">
+                        <h3>Request an Appointment / PICU Referral</h3>
+                        <div class="form-group">
+                            <label for="name">Parent / Guardian Name*</label>
+                            <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number*</label>
+                                <input type="tel" id="phone" name="phone" required placeholder="Mobile number for contact">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="Optional email ID">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="reason">Reason for Visit*</label>
+                            <select id="reason" name="reason" required>
+                                <option value="">Select an option</option>
+                                <option value="PICU referral">PICU referral / sick child transfer</option>
+                                <option value="Follow-up">Follow-up visit after PICU</option>
+                                <option value="Vaccination">Vaccination / routine check-up</option>
+                                <option value="Routine consult">Routine pediatric consultation</option>
+                                <option value="Teleconsultation">Teleconsultation / opinion</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="preferred_date">Preferred Date</label>
+                                <input type="date" id="preferred_date" name="preferred_date">
+                            </div>
+                            <div class="form-group">
+                                <label for="preferred_time">Preferred Time</label>
+                                <input type="time" id="preferred_time" name="preferred_time">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="referring_doctor">Referring Doctor (if any)</label>
+                            <input type="text" id="referring_doctor" name="referring_doctor" placeholder="Name & hospital/clinic of referring doctor">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Brief Clinical Details*</label>
+                            <textarea id="message" name="message" rows="4" required placeholder="Age of child, main problem, duration of illness, and any major diagnosis or ICU support already given."></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Submit Request</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Dr. Kapil Akula - Pediatric Intensivist & PICU Specialist. All rights reserved.</p>
+        <p style="margin-top: 0.5rem;">Ankura Hospital for Women & Children | Aundh, Pune</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for on-page buttons (hero etc.)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId && targetId.startsWith("#")) {
+                    e.preventDefault();
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        // Simple form handler
+        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const phone = document.getElementById('phone').value;
+            alert('Thank you for your request. Our team will contact you shortly on ' + phone + ' to confirm the details.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
