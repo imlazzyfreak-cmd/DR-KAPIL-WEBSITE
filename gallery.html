@@ -456,161 +456,155 @@
         <p style="margin-top: 0.5rem; font-size: 0.9rem;">Ankura Hospital for Women & Children | Aundh, Pune</p>
     </footer>
 
-    <script>
-      const imageForm = document.getElementById('imageUploadForm');
-      const imageInput = document.getElementById('imageInput');
-      const imageCaptionInput = document.getElementById('imageCaption');
-      const imageStatusDiv = document.getElementById('uploadStatus');
-      const galleryGrid = document.getElementById('galleryGrid');
+   <script>
+  const imageForm = document.getElementById('imageUploadForm');
+  const imageInput = document.getElementById('imageInput');
+  const imageCaptionInput = document.getElementById('imageCaption');
+  const imageStatusDiv = document.getElementById('uploadStatus');
+  const galleryGrid = document.getElementById('galleryGrid');
 
-      const videoForm = document.getElementById('videoUploadForm');
-      const videoInput = document.getElementById('videoInput');
-      const videoCaptionInput = document.getElementById('videoCaption');
-      const videoStatusDiv = document.getElementById('videoUploadStatus');
-      const videoGalleryGrid = document.getElementById('videoGalleryGrid');
+  const videoForm = document.getElementById('videoUploadForm');
+  const videoInput = document.getElementById('videoInput');
+  const videoCaptionInput = document.getElementById('videoCaption');
+  const videoStatusDiv = document.getElementById('videoUploadStatus');
+  const videoGalleryGrid = document.getElementById('videoGalleryGrid');
 
-      // Load saved items on page load
-      window.addEventListener('load', () => {
+  // In-memory list for videos (not saved to localStorage)
+  let videoList = [];
+
+  // Load saved items on page load
+  window.addEventListener('load', () => {
+    loadImages();   // from localStorage
+    loadVideos();   // from in-memory list
+  });
+
+  // ---------- IMAGE UPLOAD (localStorage – persists) ----------
+  if (imageForm) {
+    imageForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const file = imageInput.files[0];
+      if (!file) {
+        showImageStatus('Please select an image', 'error');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        const dataUrl = reader.result;
+
+        let gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
+        gallery.unshift({
+          url: dataUrl,
+          caption: imageCaptionInput.value || 'Uploaded image',
+          timestamp: new Date().toLocaleString()
+        });
+        localStorage.setItem('gallery', JSON.stringify(gallery));
+
+        showImageStatus('✅ Image added (saved in this browser)', 'success');
+        imageForm.reset();
         loadImages();
-        loadVideos();
+      };
+      reader.onerror = () => {
+        showImageStatus('Error reading image file', 'error');
+      };
+
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function showImageStatus(message, type) {
+    if (!imageStatusDiv) return;
+    imageStatusDiv.textContent = message;
+    imageStatusDiv.className = 'status-message ' + type;
+    imageStatusDiv.style.display = 'block';
+  }
+
+  function loadImages() {
+    if (!galleryGrid) return;
+    let gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
+
+    if (gallery.length === 0) {
+      galleryGrid.innerHTML =
+        '<div class="empty-gallery"><p>📁 No images uploaded yet. Be the first to add an image!</p></div>';
+      return;
+    }
+
+    galleryGrid.innerHTML = gallery
+      .map(
+        (item) => `
+        <div class="gallery-item">
+          <img src="${item.url}" alt="${item.caption}">
+          <div class="gallery-item-info">
+            <p style="margin:0; font-weight:500;">${item.caption}</p>
+            <p style="margin-top:0.25rem; font-size:0.85rem;">📅 ${item.timestamp}</p>
+          </div>
+        </div>
+      `
+      )
+      .join('');
+  }
+
+  // ---------- VIDEO UPLOAD (in memory only – no localStorage) ----------
+  if (videoForm) {
+    videoForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const file = videoInput.files[0];
+      if (!file) {
+        showVideoStatus('Please select a video', 'error');
+        return;
+      }
+
+      // Create an object URL instead of saving to localStorage
+      const url = URL.createObjectURL(file);
+
+      videoList.unshift({
+        url,
+        caption: videoCaptionInput.value || 'Uploaded video',
+        timestamp: new Date().toLocaleString()
       });
 
-      // ---------- IMAGE UPLOAD (local only) ----------
-      if (imageForm) {
-        imageForm.addEventListener('submit', (e) => {
-          e.preventDefault();
+      showVideoStatus('✅ Video added (will be available while this page is open)', 'success');
+      videoForm.reset();
+      loadVideos();
+    });
+  }
 
-          const file = imageInput.files[0];
-          if (!file) {
-            showImageStatus('Please select an image', 'error');
-            return;
-          }
+  function showVideoStatus(message, type) {
+    if (!videoStatusDiv) return;
+    videoStatusDiv.textContent = message;
+    videoStatusDiv.className = 'status-message ' + type;
+    videoStatusDiv.style.display = 'block';
+  }
 
-          const reader = new FileReader();
-          reader.onload = () => {
-            const dataUrl = reader.result;
+  function loadVideos() {
+    if (!videoGalleryGrid) return;
 
-            let gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
-            gallery.unshift({
-              url: dataUrl,
-              caption: imageCaptionInput.value || 'Uploaded image',
-              timestamp: new Date().toLocaleString()
-            });
-            localStorage.setItem('gallery', JSON.stringify(gallery));
+    if (videoList.length === 0) {
+      videoGalleryGrid.innerHTML =
+        '<div class="empty-video"><p>🎥 No videos uploaded yet. Add the first PICU update or health talk!</p></div>';
+      return;
+    }
 
-            showImageStatus('✅ Image added (saved in this browser)', 'success');
-            imageForm.reset();
-            loadImages();
-          };
-          reader.onerror = () => {
-            showImageStatus('Error reading image file', 'error');
-          };
+    videoGalleryGrid.innerHTML = videoList
+      .map(
+        (item) => `
+        <div class="video-item">
+          <video controls preload="metadata">
+            <source src="${item.url}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-item-info">
+            <p style="margin:0; font-weight:500;">${item.caption}</p>
+            <p style="margin-top:0.25rem; font-size:0.85rem;">📅 ${item.timestamp}</p>
+          </div>
+        </div>
+      `
+      )
+      .join('');
+  }
+</script>
 
-          reader.readAsDataURL(file);
-        });
-      }
-
-      function showImageStatus(message, type) {
-        if (!imageStatusDiv) return;
-        imageStatusDiv.textContent = message;
-        imageStatusDiv.className = 'status-message ' + type;
-        imageStatusDiv.style.display = 'block';
-      }
-
-      function loadImages() {
-        if (!galleryGrid) return;
-        let gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
-
-        if (gallery.length === 0) {
-          galleryGrid.innerHTML =
-            '<div class="empty-gallery"><p>📁 No images uploaded yet. Be the first to add an image!</p></div>';
-          return;
-        }
-
-        galleryGrid.innerHTML = gallery
-          .map(
-            (item) => `
-            <div class="gallery-item">
-              <img src="${item.url}" alt="${item.caption}">
-              <div class="gallery-item-info">
-                <p style="margin:0; font-weight:500;">${item.caption}</p>
-                <p style="margin-top:0.25rem; font-size:0.85rem;">📅 ${item.timestamp}</p>
-              </div>
-            </div>
-          `
-          )
-          .join('');
-      }
-
-      // ---------- VIDEO UPLOAD (local only) ----------
-      if (videoForm) {
-        videoForm.addEventListener('submit', (e) => {
-          e.preventDefault();
-
-          const file = videoInput.files[0];
-          if (!file) {
-            showVideoStatus('Please select a video', 'error');
-            return;
-          }
-
-          const reader = new FileReader();
-          reader.onload = () => {
-            const dataUrl = reader.result;
-
-            let videos = JSON.parse(localStorage.getItem('videoGallery') || '[]');
-            videos.unshift({
-              url: dataUrl,
-              caption: videoCaptionInput.value || 'Uploaded video',
-              timestamp: new Date().toLocaleString()
-            });
-            localStorage.setItem('videoGallery', JSON.stringify(videos));
-
-            showVideoStatus('✅ Video added (saved in this browser)', 'success');
-            videoForm.reset();
-            loadVideos();
-          };
-          reader.onerror = () => {
-            showVideoStatus('Error reading video file', 'error');
-          };
-
-          reader.readAsDataURL(file);
-        });
-      }
-
-      function showVideoStatus(message, type) {
-        if (!videoStatusDiv) return;
-        videoStatusDiv.textContent = message;
-        videoStatusDiv.className = 'status-message ' + type;
-        videoStatusDiv.style.display = 'block';
-      }
-
-      function loadVideos() {
-        if (!videoGalleryGrid) return;
-        let videos = JSON.parse(localStorage.getItem('videoGallery') || '[]');
-
-        if (videos.length === 0) {
-          videoGalleryGrid.innerHTML =
-            '<div class="empty-video"><p>🎥 No videos uploaded yet. Add the first PICU update or health talk!</p></div>';
-          return;
-        }
-
-        videoGalleryGrid.innerHTML = videos
-          .map(
-            (item) => `
-            <div class="video-item">
-              <video controls preload="metadata">
-                <source src="${item.url}" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-              <div class="video-item-info">
-                <p style="margin:0; font-weight:500;">${item.caption}</p>
-                <p style="margin-top:0.25rem; font-size:0.85rem;">📅 ${item.timestamp}</p>
-              </div>
-            </div>
-          `
-          )
-          .join('');
-      }
-    </script>
 </body>
 </html>
