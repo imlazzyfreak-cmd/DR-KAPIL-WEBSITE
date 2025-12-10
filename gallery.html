@@ -261,17 +261,6 @@
             margin-bottom: 0.5rem;
         }
 
-        .gallery-item-link {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .gallery-item-link:hover {
-            text-decoration: underline;
-        }
-
         .empty-gallery {
             text-align: center;
             padding: 3rem;
@@ -284,7 +273,6 @@
             font-size: 1.1rem;
         }
 
-        
         /* Video Gallery */
         .video-section {
             margin-top: 3rem;
@@ -334,7 +322,6 @@
             border-radius: 8px;
             color: var(--text-light);
         }
-
 
         footer {
             background: var(--secondary-color);
@@ -464,368 +451,166 @@
         </div>
     </div>
 
-<footer>
+    <footer>
         <p>&copy; 2024 Dr. Kapil Akula - Pediatric Intensivist. All rights reserved.</p>
         <p style="margin-top: 0.5rem; font-size: 0.9rem;">Ankura Hospital for Women & Children | Aundh, Pune</p>
     </footer>
 
     <script>
-  const imageForm = document.getElementById('imageUploadForm');
-  const imageInput = document.getElementById('imageInput');
-  const imageCaptionInput = document.getElementById('imageCaption');
-  const imageStatusDiv = document.getElementById('uploadStatus');
-  const galleryGrid = document.getElementById('galleryGrid');
+      const imageForm = document.getElementById('imageUploadForm');
+      const imageInput = document.getElementById('imageInput');
+      const imageCaptionInput = document.getElementById('imageCaption');
+      const imageStatusDiv = document.getElementById('uploadStatus');
+      const galleryGrid = document.getElementById('galleryGrid');
 
-  const videoForm = document.getElementById('videoUploadForm');
-  const videoInput = document.getElementById('videoInput');
-  const videoCaptionInput = document.getElementById('videoCaption');
-  const videoStatusDiv = document.getElementById('videoUploadStatus');
-  const videoGalleryGrid = document.getElementById('videoGalleryGrid');
+      const videoForm = document.getElementById('videoUploadForm');
+      const videoInput = document.getElementById('videoInput');
+      const videoCaptionInput = document.getElementById('videoCaption');
+      const videoStatusDiv = document.getElementById('videoUploadStatus');
+      const videoGalleryGrid = document.getElementById('videoGalleryGrid');
 
-  // Load saved items on page load
-  window.addEventListener('load', () => {
-    loadImages();
-    loadVideos();
-  });
-
-  // ---------- IMAGE UPLOAD (local only) ----------
-  if (imageForm) {
-    imageForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const file = imageInput.files[0];
-      if (!file) {
-        showImageStatus('Please select an image', 'error');
-        return;
-      }
-
-      const reader = new FileReader();
-      reader.onload = () => {
-        const dataUrl = reader.result;
-
-        let gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
-        gallery.unshift({
-          url: dataUrl,
-          caption: imageCaptionInput.value || 'Uploaded image',
-          timestamp: new Date().toLocaleString()
-        });
-        localStorage.setItem('gallery', JSON.stringify(gallery));
-
-        showImageStatus('✅ Image added (saved in this browser)', 'success');
-        imageForm.reset();
+      // Load saved items on page load
+      window.addEventListener('load', () => {
         loadImages();
-      };
-      reader.onerror = () => {
-        showImageStatus('Error reading image file', 'error');
-      };
+        loadVideos();
+      });
 
-      reader.readAsDataURL(file);
-    });
-  }
+      // ---------- IMAGE UPLOAD (local only) ----------
+      if (imageForm) {
+        imageForm.addEventListener('submit', (e) => {
+          e.preventDefault();
 
-  function showImageStatus(message, type) {
-    if (!imageStatusDiv) return;
-    imageStatusDiv.textContent = message;
-    imageStatusDiv.className = 'status-message ' + type;
-    imageStatusDiv.style.display = 'block';
-  }
+          const file = imageInput.files[0];
+          if (!file) {
+            showImageStatus('Please select an image', 'error');
+            return;
+          }
 
-  function loadImages() {
-    if (!galleryGrid) return;
-    let gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
+          const reader = new FileReader();
+          reader.onload = () => {
+            const dataUrl = reader.result;
 
-    if (gallery.length === 0) {
-      galleryGrid.innerHTML =
-        '<div class="empty-gallery"><p>📁 No images uploaded yet. Be the first to add an image!</p></div>';
-      return;
-    }
+            let gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
+            gallery.unshift({
+              url: dataUrl,
+              caption: imageCaptionInput.value || 'Uploaded image',
+              timestamp: new Date().toLocaleString()
+            });
+            localStorage.setItem('gallery', JSON.stringify(gallery));
 
-    galleryGrid.innerHTML = gallery
-      .map(
-        (item) => `
-        <div class="gallery-item">
-          <img src="${item.url}" alt="${item.caption}">
-          <div class="gallery-item-info">
-            <p style="margin:0; font-weight:500;">${item.caption}</p>
-            <p style="margin-top:0.25rem; font-size:0.85rem;">📅 ${item.timestamp}</p>
-          </div>
-        </div>
-      `
-      )
-      .join('');
-  }
+            showImageStatus('✅ Image added (saved in this browser)', 'success');
+            imageForm.reset();
+            loadImages();
+          };
+          reader.onerror = () => {
+            showImageStatus('Error reading image file', 'error');
+          };
 
-  // ---------- VIDEO UPLOAD (local only) ----------
-  if (videoForm) {
-    videoForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const file = videoInput.files[0];
-      if (!file) {
-        showVideoStatus('Please select a video', 'error');
-        return;
+          reader.readAsDataURL(file);
+        });
       }
 
-      const reader = new FileReader();
-      reader.onload = () => {
-        const dataUrl = reader.result;
+      function showImageStatus(message, type) {
+        if (!imageStatusDiv) return;
+        imageStatusDiv.textContent = message;
+        imageStatusDiv.className = 'status-message ' + type;
+        imageStatusDiv.style.display = 'block';
+      }
 
-        let videos = JSON.parse(localStorage.getItem('videoGallery') || '[]');
-        videos.unshift({
-          url: dataUrl,
-          caption: videoCaptionInput.value || 'Uploaded video',
-          timestamp: new Date().toLocaleString()
-        });
-        localStorage.setItem('videoGallery', JSON.stringify(videos));
+      function loadImages() {
+        if (!galleryGrid) return;
+        let gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
 
-        showVideoStatus('✅ Video added (saved in this browser)', 'success');
-        videoForm.reset();
-        loadVideos();
-      };
-      reader.onerror = () => {
-        showVideoStatus('Error reading video file', 'error');
-      };
+        if (gallery.length === 0) {
+          galleryGrid.innerHTML =
+            '<div class="empty-gallery"><p>📁 No images uploaded yet. Be the first to add an image!</p></div>';
+          return;
+        }
 
-      reader.readAsDataURL(file);
-    });
-  }
+        galleryGrid.innerHTML = gallery
+          .map(
+            (item) => `
+            <div class="gallery-item">
+              <img src="${item.url}" alt="${item.caption}">
+              <div class="gallery-item-info">
+                <p style="margin:0; font-weight:500;">${item.caption}</p>
+                <p style="margin-top:0.25rem; font-size:0.85rem;">📅 ${item.timestamp}</p>
+              </div>
+            </div>
+          `
+          )
+          .join('');
+      }
 
-  function showVideoStatus(message, type) {
-    if (!videoStatusDiv) return;
-    videoStatusDiv.textContent = message;
-    videoStatusDiv.className = 'status-message ' + type;
-    videoStatusDiv.style.display = 'block';
-  }
+      // ---------- VIDEO UPLOAD (local only) ----------
+      if (videoForm) {
+        videoForm.addEventListener('submit', (e) => {
+          e.preventDefault();
 
-  function loadVideos() {
-    if (!videoGalleryGrid) return;
-    let videos = JSON.parse(localStorage.getItem('videoGallery') || '[]');
+          const file = videoInput.files[0];
+          if (!file) {
+            showVideoStatus('Please select a video', 'error');
+            return;
+          }
 
-    if (videos.length === 0) {
-      videoGalleryGrid.innerHTML =
-        '<div class="empty-video"><p>🎥 No videos uploaded yet. Add the first PICU update or health talk!</p></div>';
-      return;
-    }
+          const reader = new FileReader();
+          reader.onload = () => {
+            const dataUrl = reader.result;
 
-    videoGalleryGrid.innerHTML = videos
-      .map(
-        (item) => `
-        <div class="video-item">
-          <video controls preload="metadata">
-            <source src="${item.url}" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-          <div class="video-item-info">
-            <p style="margin:0; font-weight:500;">${item.caption}</p>
-            <p style="margin-top:0.25rem; font-size:0.85rem;">📅 ${item.timestamp}</p>
-          </div>
-        </div>
-      `
-      )
-      .join('');
-  }
-</script>
+            let videos = JSON.parse(localStorage.getItem('videoGallery') || '[]');
+            videos.unshift({
+              url: dataUrl,
+              caption: videoCaptionInput.value || 'Uploaded video',
+              timestamp: new Date().toLocaleString()
+            });
+            localStorage.setItem('videoGallery', JSON.stringify(videos));
 
-    <script>
-        const form = document.getElementById('imageUploadForm');
-        const imageInput = document.getElementById('imageInput');
-        const statusDiv = document.getElementById('uploadStatus');
-        const galleryGrid = document.getElementById('galleryGrid');
-
-        const videoForm = document.getElementById('videoUploadForm');
-        const videoInput = document.getElementById('videoInput');
-        const videoStatusDiv = document.getElementById('videoUploadStatus');
-        const videoGalleryGrid = document.getElementById('videoGalleryGrid');
-
-        // Load both images and videos from localStorage on page load
-        window.addEventListener('load', () => {
-            loadImages();
+            showVideoStatus('✅ Video added (saved in this browser)', 'success');
+            videoForm.reset();
             loadVideos();
+          };
+          reader.onerror = () => {
+            showVideoStatus('Error reading video file', 'error');
+          };
+
+          reader.readAsDataURL(file);
         });
+      }
 
-        // IMAGE UPLOAD HANDLER
-        if (form) {
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
+      function showVideoStatus(message, type) {
+        if (!videoStatusDiv) return;
+        videoStatusDiv.textContent = message;
+        videoStatusDiv.className = 'status-message ' + type;
+        videoStatusDiv.style.display = 'block';
+      }
 
-                const file = imageInput.files[0];
-                if (!file) {
-                    showStatus('Please select an image', 'error');
-                    return;
-                }
+      function loadVideos() {
+        if (!videoGalleryGrid) return;
+        let videos = JSON.parse(localStorage.getItem('videoGallery') || '[]');
 
-                showStatus('⏳ Uploading image...', 'info');
-
-                try {
-                    const reader = new FileReader();
-                    reader.readAsDataURL(file);
-
-                    reader.onload = async () => {
-                        try {
-                            const response = await fetch('/.netlify/functions/upload-image', {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ file: reader.result })
-                            });
-
-                            const data = await response.json();
-
-                            if (data.success) {
-                                saveImageToGallery({
-                                    url: data.url,
-                                    caption: document.getElementById('imageCaption').value || 'Uploaded Image',
-                                    timestamp: new Date().toLocaleDateString()
-                                });
-
-                                showStatus('✅ Image uploaded successfully!', 'success');
-                                form.reset();
-                                loadImages();
-                            } else {
-                                showStatus('❌ Error: ' + data.error, 'error');
-                            }
-                        } catch (error) {
-                            showStatus('❌ Upload failed: ' + error.message, 'error');
-                        }
-                    };
-                } catch (error) {
-                    showStatus('❌ Error processing image: ' + error.message, 'error');
-                }
-            });
+        if (videos.length === 0) {
+          videoGalleryGrid.innerHTML =
+            '<div class="empty-video"><p>🎥 No videos uploaded yet. Add the first PICU update or health talk!</p></div>';
+          return;
         }
 
-        function showStatus(message, type) {
-            statusDiv.textContent = message;
-            statusDiv.className = 'status-message ' + type;
-            statusDiv.style.display = 'block';
-            setTimeout(() => {
-                if (type === 'success') statusDiv.style.display = 'none';
-            }, 5000);
-        }
-
-        function saveImageToGallery(imageData) {
-            let gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
-            gallery.unshift(imageData);
-            localStorage.setItem('gallery', JSON.stringify(gallery));
-        }
-
-        function loadImages() {
-            let gallery = JSON.parse(localStorage.getItem('gallery') || '[]');
-
-            if (gallery.length === 0) {
-                galleryGrid.innerHTML = '<div class="empty-gallery"><p>📁 No images uploaded yet. Be the first to add an image!</p></div>';
-                return;
-            }
-
-            galleryGrid.innerHTML = gallery.map((item, index) => `
-                <div class="gallery-item">
-                    <img src="${item.url}" alt="${item.caption}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22250%22 height=%22250%22%3E%3Crect fill=%22%23ddd%22 width=%22250%22 height=%22250%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2220%22 fill=%22%23999%22%3EImage not available%3C/text%3E%3C/svg%3E'">
-                    <div class="gallery-item-info">
-                        <p style="margin: 0; color: var(--text-dark); font-weight: 500;">${item.caption}</p>
-                        <p style="margin: 0.25rem 0 0; font-size: 0.85rem;">📅 ${item.timestamp}</p>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // VIDEO UPLOAD HANDLER
-        if (videoForm) {
-            videoForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-
-                const file = videoInput.files[0];
-                if (!file) {
-                    showVideoStatus('Please select a video', 'error');
-                    return;
-                }
-
-                showVideoStatus('⏳ Uploading video...', 'info');
-
-                try {
-                    const reader = new FileReader();
-                    reader.readAsDataURL(file);
-
-                    reader.onload = async () => {
-                        try {
-                            const response = await fetch('/.netlify/functions/upload-video', {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ file: reader.result })
-                            });
-
-                            const data = await response.json();
-
-                            if (data.success) {
-                                saveVideoToGallery({
-                                    url: data.url,
-                                    caption: document.getElementById('videoCaption').value || 'Uploaded Video',
-                                    timestamp: new Date().toLocaleDateString()
-                                });
-
-                                showVideoStatus('✅ Video uploaded successfully!', 'success');
-                                videoForm.reset();
-                                loadVideos();
-                            } else {
-                                showVideoStatus('❌ Error: ' + data.error, 'error');
-                            }
-                        } catch (error) {
-                            showVideoStatus('❌ Upload failed: ' + error.message, 'error');
-                        }
-                    };
-                } catch (error) {
-                    showVideoStatus('❌ Error processing video: ' + error.message, 'error');
-                }
-            });
-        }
-
-        function showVideoStatus(message, type) {
-            videoStatusDiv.textContent = message;
-            videoStatusDiv.className = 'status-message ' + type;
-            videoStatusDiv.style.display = 'block';
-            setTimeout(() => {
-                if (type === 'success') videoStatusDiv.style.display = 'none';
-            }, 5000);
-        }
-
-        function saveVideoToGallery(videoData) {
-            let gallery = JSON.parse(localStorage.getItem('videoGallery') || '[]');
-            gallery.unshift(videoData);
-            localStorage.setItem('videoGallery', JSON.stringify(gallery));
-        }
-
-        function loadVideos() {
-            let gallery = JSON.parse(localStorage.getItem('videoGallery') || '[]');
-
-            if (gallery.length === 0) {
-                videoGalleryGrid.innerHTML = '<div class="empty-video"><p>🎥 No videos uploaded yet. Add the first PICU update or health talk!</p></div>';
-                return;
-            }
-
-            videoGalleryGrid.innerHTML = gallery.map((item, index) => `
-                <div class="video-item">
-                    <video controls preload="metadata">
-                        <source src="${item.url}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                    <div class="video-item-info">
-                        <p style="font-weight: 500; color: var(--text-dark);">${item.caption}</p>
-                        <p style="margin-top: 0.25rem; font-size: 0.85rem;">📅 ${item.timestamp}</p>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const targetId = this.getAttribute('href');
-                if (targetId && targetId.startsWith("#")) {
-                    e.preventDefault();
-                    const target = document.querySelector(targetId);
-                    if (target) target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
+        videoGalleryGrid.innerHTML = videos
+          .map(
+            (item) => `
+            <div class="video-item">
+              <video controls preload="metadata">
+                <source src="${item.url}" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div class="video-item-info">
+                <p style="margin:0; font-weight:500;">${item.caption}</p>
+                <p style="margin-top:0.25rem; font-size:0.85rem;">📅 ${item.timestamp}</p>
+              </div>
+            </div>
+          `
+          )
+          .join('');
+      }
     </script>
-
 </body>
 </html>
