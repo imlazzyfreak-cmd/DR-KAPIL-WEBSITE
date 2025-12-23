@@ -799,6 +799,101 @@
                 width: 100%;
             }
         }
+        /* =========================
+   HERO IMAGE SLIDER
+========================= */
+.hero-slider {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.hero-slider img {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.hero-slider img.active {
+  opacity: 1;
+}
+
+/* =========================
+   GALLERY SLIDER
+========================= */
+.gallery-slider {
+  display: flex;
+  gap: 20px;
+  overflow: hidden;
+}
+
+.gallery-track {
+  display: flex;
+  animation: scrollGallery 25s linear infinite;
+}
+
+.gallery-track img {
+  width: 260px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+@keyframes scrollGallery {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* =========================
+   VIRTUAL ASSISTANT
+========================= */
+#assistant {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.2);
+  overflow: hidden;
+  display: none;
+  z-index: 9999;
+}
+
+#assistant-header {
+  background: #0066cc;
+  color: white;
+  padding: 12px;
+  font-weight: 600;
+}
+
+#assistant-body {
+  padding: 12px;
+  font-size: 14px;
+  color: #333;
+}
+
+#assistant-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #0066cc;
+  color: white;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 9998;
+}
     </style>
 <script type="application/ld+json">
 {
@@ -909,8 +1004,17 @@
     <section class="hero">
         <div class="hero-content">
             <div class="hero-image-wrapper">
-                <img src="images/headshot.png" alt="Dr. Kapil Akula - Pediatric Intensivist Headshot" class="hero-headshot">
-            </div>
+                <div class="hero-image-wrapper">
+  <div class="hero-slider">
+    <img src="images/slide1.jpg"
+         alt="Dr. Kapil Akula - Pediatric Intensivist"
+         class="active">
+    <img src="images/slide2.jpg"
+         alt="PICU Care at Ankura Hospital">
+    <img src="images/slide3.jpg"
+         alt="Pediatric Critical Care Services">
+  </div>
+     </div>
             <div class="hero-text">
                 <h1>Pediatric Intensivist & PICU Specialist in Aundh, Pune</h1>
                 <p class="subtitle">Expert critical care for infants and children – when every minute counts.</p>
@@ -1073,13 +1177,27 @@
         </section>
 
         <!-- Gallery Preview -->
-        <section id="gallery-preview">
-            <div class="container">
-                <h2 class="section-title">Gallery & Professional Activities</h2>
-                <p class="section-subtitle">Workshops, academic presentations, PICU training sessions and certificates reflecting our commitment to quality pediatric intensive care.</p>
-                <a href="gallery.html" class="gallery-link">View Gallery</a>
-            </div>
-        </section>
+       <section id="gallery-preview">
+  <div class="container">
+    <h2 class="section-title">Gallery & Professional Activities</h2>
+    <p class="section-subtitle">
+      Workshops, academic presentations, PICU training sessions and certifications.
+    </p>
+
+    <div class="gallery-slider">
+      <div class="gallery-track">
+        <img src="images/gallery1.jpg">
+        <img src="images/gallery2.jpg">
+        <img src="images/gallery3.jpg">
+        <img src="images/gallery4.jpg">
+        <img src="images/gallery1.jpg">
+        <img src="images/gallery2.jpg">
+      </div>
+    </div>
+
+    <a href="gallery.html" class="gallery-link">View Full Gallery</a>
+  </div>
+</section> 
 
         <!-- Contact & Location Section -->
         <section id="contact">
@@ -1192,5 +1310,41 @@
         <p>&copy; 2024 Dr. Kapil Akula - Pediatric Intensivist & PICU Specialist. All rights reserved.</p>
         <p style="margin-top: 0.5rem;">Ankura Hospital for Women & Children | Aundh, Pune</p>
     </footer>
+    <button id="assistant-toggle">💬</button>
+
+<div id="assistant">
+  <div id="assistant-header">PICU Help Assistant</div>
+  <div id="assistant-body">
+    👋 Hello!  
+    <br><br>
+    • Emergency PICU referral  
+    <br>
+    • Appointment guidance  
+    <br>
+    • Teleconsultation queries  
+    <br><br>
+    📞 Call <strong>+91-8657150216</strong> for urgent cases.
+  </div>
+</div>
+    <script>
+/* HERO IMAGE SLIDER */
+const slides = document.querySelectorAll(".hero-slider img");
+let slideIndex = 0;
+
+setInterval(() => {
+  slides[slideIndex].classList.remove("active");
+  slideIndex = (slideIndex + 1) % slides.length;
+  slides[slideIndex].classList.add("active");
+}, 4000);
+
+/* VIRTUAL ASSISTANT TOGGLE */
+const toggleBtn = document.getElementById("assistant-toggle");
+const assistant = document.getElementById("assistant");
+
+toggleBtn.addEventListener("click", () => {
+  assistant.style.display =
+    assistant.style.display === "block" ? "none" : "block";
+});
+</script>
     </body>
 </html>
