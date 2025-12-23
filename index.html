@@ -240,18 +240,7 @@
         .hero-image-wrapper {
             display: flex;
             justify-content: center;
-        }
-
-        .hero-headshot {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid rgba(255,255,255,0.9);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.35);
-            background: #ffffff;
-        }
-
+        }     
         .hero-text h1 {
             font-size: 2.7rem;
             margin-bottom: 0.75rem;
@@ -799,20 +788,20 @@
                 width: 100%;
             }
         }
-        /* =========================
-        /* ===== HERO IMAGE SLIDER (RECTANGULAR) ===== */
+       /* ===== HERO IMAGE SLIDER (RECTANGULAR – FIXED) ===== */
 .hero-slider {
   position: relative;
   width: 100%;
-  max-width: 520px;
-  height: 380px;
+  max-width: 600px;
+  height: 420px;
   overflow: hidden;
-  border-radius: 16px; /* rounded rectangle */
+  border-radius: 16px;
   box-shadow: 0 12px 30px rgba(0,0,0,0.25);
 }
 
 .hero-slider img {
   position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -824,6 +813,13 @@
   opacity: 1;
 }
 
+/* Mobile */
+@media (max-width: 768px) {
+  .hero-slider {
+    height: 260px;
+    max-width: 100%;
+  }
+}
 /* Desktop */
 @media (min-width: 1024px) {
   .hero-slider {
@@ -1018,16 +1014,18 @@
     <section class="hero">
         <div class="hero-content">
             <div class="hero-image-wrapper">
-                <div class="hero-image-wrapper">
   <div class="hero-slider">
-    <img src="images/headshot.png" class="active">    
-        alt="Dr. Kapil Akula - Pediatric Intensivist">         
+    <img src="images/headshot.png"
+         alt="Dr. Kapil Akula - Pediatric Intensivist"
+         class="active">
+
     <img src="images/slide2.jpg"
          alt="PICU Care at Ankura Hospital">
+
     <img src="images/slide3.jpg"
          alt="Pediatric Critical Care Services">
   </div>
-     </div>
+</div>
             <div class="hero-text">
                 <h1>Pediatric Intensivist & PICU Specialist in Aundh, Pune</h1>
                 <p class="subtitle">Expert critical care for infants and children – when every minute counts.</p>
